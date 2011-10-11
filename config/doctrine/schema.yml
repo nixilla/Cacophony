@@ -1,0 +1,7 @@
+sfGuardUser:
+  columns:
+    email_address:
+      notnull: false
+      unique: false
+    username:
+      unique: false
