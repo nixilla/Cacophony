@@ -11,7 +11,7 @@ dev:
     error_reporting:        <?php echo (E_ALL | E_STRICT)."\n" ?>
     web_debug:              true
     cache:                  false
-    no_script_name:         false
+    no_script_name:         true
     etag:                   false
 
 test:
@@ -33,3 +33,11 @@ all:
 
     # Enable the database manager
     use_database:           true
+    
+    enabled_modules:        [default, sfGuardAuth, sfGuardRegister, sfCacophonyConsumer]
+
+    login_module:           sfGuardAuth
+    login_action:           signin
+
+    secure_module:          sfGuardAuth
+    secure_action:          secure
