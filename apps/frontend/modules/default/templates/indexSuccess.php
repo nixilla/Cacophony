@@ -15,7 +15,7 @@
   <?php if($sf_user->getCurrentProvider() == 'facebook'): ?><li><?php echo link_to('See what you can do with Facebook','@homepage'); ?></li><?php endif; ?>
   <?php else: ?>
   <li><?php echo link_to('Login with Twitter','@sf_cacophony_connect?provider=twitter'); ?></li>
-  <li><?php echo link_to('Login with Vimeo','@sf_cacophony_connect?provider=vimeo'); ?></li>
+  <li><?php echo link_to('Login with Vimeo','demo/vimeo'); ?></li>
   <li><?php echo link_to('Login with Facebook','@sf_cacophony_connect?provider=facebook'); ?></li>
   <?php endif; ?>
 </ul>

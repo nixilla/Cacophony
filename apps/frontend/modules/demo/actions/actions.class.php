@@ -17,6 +17,43 @@ class demoActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->forward('default', 'module');
+    $this->forward('default', 'index');
+  }
+  
+  public function executeVimeo(sfWebRequest $request)
+  {
+    $this->videos = json_decode(sfCacophonyOAuth::call(
+      'vimeo.videos.getUploaded',
+      'vimeo',
+      $this->getUser()->getAttribute('accessToken',null,'sfCacophonyPlugin/vimeo')
+    ));
+  }
+  
+  /**
+   *
+   * @param sfWebRequest $request 
+   * @return sfView::SUCCESS
+   */
+  public function executeCall(sfWebRequest $request)
+  {
+    $this->forward404Unless($request->getParameter('provider'));
+    $this->forward404Unless($request->getParameter('method'));
+    
+    $config = sfConfig::get('app_cacophony');
+    $this->forward404Unless(in_array($request->getParameter('provider'), array_keys($config['providers'])));
+    
+    $params = array();
+    foreach($request->getParameterHolder()->getAll() as $k => $p)
+      if( ! in_array($k,array('method','action','module','provider')))
+        $params[$k] = $p;
+      
+    $result = json_decode(sfCacophonyOAuth::call(
+      $request->getParameter('method'),
+      $request->getParameter('provider'),
+      $this->getUser()->getAttribute('accessToken', null, sprintf('sfCacophonyPlugin/%s',$request->getParameter('provider'))),
+      $params
+    ));
+    
+    $this->setVar('result', $result, true);
   }
 }
