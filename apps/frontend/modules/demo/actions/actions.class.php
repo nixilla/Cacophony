@@ -20,6 +20,11 @@ class demoActions extends sfActions
     $this->forward('default', 'index');
   }
   
+  /**
+   * Vimeo action
+   * 
+   * @param sfWebRequest $request 
+   */
   public function executeVimeo(sfWebRequest $request)
   {
     $this->videos = json_decode(sfCacophonyOAuth::call(
@@ -29,6 +34,11 @@ class demoActions extends sfActions
     ));
   }
   
+  /**
+   * Twitter action
+   * 
+   * @param sfWebRequest $request 
+   */
   public function executeTwitter(sfWebRequest $request)
   {
     $timeline = json_decode(sfCacophonyOAuth::call(
@@ -39,10 +49,26 @@ class demoActions extends sfActions
     
     $this->setVar('timeline', $timeline, true);
   }
-
+  
+  /**
+   * Facebook action
+   * 
+   * @param sfWebRequest $request 
+   */
+  public function executeFacebook(sfWebRequest $request)
+  {
+    $feed = json_decode(sfCacophonyOAuth::call(
+      'me/home',
+      'facebook',
+      $this->getUser()->getAttribute('accessToken',null,'sfCacophonyPlugin/facebook')
+    ));
+    
+    $this->setVar('feed', $feed, true);
+  }
 
   /**
-   *
+   * Generic call action for all providers
+   * 
    * @param sfWebRequest $request 
    * @return sfView::SUCCESS
    */
