@@ -19,4 +19,4 @@
   <li><?php echo link_to('vimeo.videos.getSubscriptions','@demo_call?provider=vimeo&method=vimeo.videos.getSubscriptions'); ?></li>
 </ul>
 
-<p>For more methods go to <a href="http://vimeo.com/api/docs/methods">Vimeo API page</a></p>
+<p>For more methods go to <a href="http://vimeo.com/api/docs/methods">Vimeo API page</a> | <?php echo link_to('Home','@homepage'); ?></p>

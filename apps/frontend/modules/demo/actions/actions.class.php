@@ -29,6 +29,18 @@ class demoActions extends sfActions
     ));
   }
   
+  public function executeTwitter(sfWebRequest $request)
+  {
+    $timeline = json_decode(sfCacophonyOAuth::call(
+      'statuses/home_timeline',
+      'twitter',
+      $this->getUser()->getAttribute('accessToken',null,'sfCacophonyPlugin/twitter')
+    ));
+    
+    $this->setVar('timeline', $timeline, true);
+  }
+
+
   /**
    *
    * @param sfWebRequest $request 
