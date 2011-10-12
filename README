@@ -4,10 +4,15 @@
 1. cd cacophony
 1. mkdir cache log
 1. ./symfony plugin:install -d sfCacophonyPlugin
+1. vim config/databases.yml
 1. ./symfony doctrine:build --all
 1. ./symfony project:permissions
 1. vim apps/frontend/config/app.yml
 1. ./symfony cc
 
-In 7th line (vim apps/frontend/config/app.yml) add your app keys and secrets).
 
+In 5th line add your database credentials.
+
+In 8th line (vim apps/frontend/config/app.yml) add your app keys and secrets).
+
+Now navigate to @homepage.
