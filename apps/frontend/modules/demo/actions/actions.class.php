@@ -67,6 +67,23 @@ class demoActions extends sfActions
   }
 
   /**
+   * Executes Netflix demo
+   *
+   * @param sfWebRequest $request
+   */
+  public function executeNetflix(sfWebRequest $request)
+  {
+    $titles = json_decode(sfCacophonyOAuth::call(
+      'catalog/titles/autocomplete',
+      'netflix',
+      $this->getUser()->getAttribute('accessToken',null,'sfCacophonyPlugin/netflix'),
+      array('term' => 'star', 'start_index' => 0, 'max_results' => 10)
+    ));
+
+    $this->setVar('titles', $titles, true);
+  }
+
+  /**
    * Generic call action for all providers
    * 
    * @param sfWebRequest $request 
