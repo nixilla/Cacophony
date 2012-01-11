@@ -16,3 +16,6 @@ all:
           consumer_key: YOUR_APP_ID
           consumer_secret: YOUR_APP_SECRET
           scope: user_about_me,user_checkins,user_likes,user_status
+        netflix:
+          consumer_key: YOUR_NETFLIX_KEY
+          consumer_secret: YOUR_NETFLIX_SECRET
